@@ -1,0 +1,4 @@
+interface:
+  display_name: "File ITR-2 as NRI"
+  short_description: "NRI residency and treaty extension"
+  default_prompt: "Use $filing-itr2-nri with $filing-itr2 to guide my NRI ITR-2 filing one step at a time."

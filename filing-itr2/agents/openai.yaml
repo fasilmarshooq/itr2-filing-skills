@@ -1,0 +1,4 @@
+interface:
+  display_name: "File Indian ITR-2"
+  short_description: "Guided, compliant ITR-2 filing journey"
+  default_prompt: "Use $filing-itr2 to guide me through my Indian ITR-2 filing one step at a time."
