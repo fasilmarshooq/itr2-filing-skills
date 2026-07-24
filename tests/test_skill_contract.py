@@ -86,18 +86,29 @@ class NriSkillContract(unittest.TestCase):
 
 
 class ReadmeContract(unittest.TestCase):
-    def test_readme_has_copy_paste_install_and_usage(self) -> None:
+    def test_readme_has_cross_agent_install_and_usage(self) -> None:
         readme = read(ROOT / "README.md")
         for term in (
-            "--repo fasilmarshooq/itr2-filing-skills",
-            "--path filing-itr2 filing-itr2-nri",
-            "$filing-itr2",
-            "$filing-itr2-nri",
-            "next Codex turn",
+            "npx skills add fasilmarshooq/itr2-filing-skills",
+            "--skill filing-itr2",
+            "--skill filing-itr2-nri",
+            "-a codex",
+            "-a claude-code",
+            "-a cursor",
+            "OpenAI Codex",
+            "Claude Code",
+            "Cursor",
+            "new agent session",
             "Update",
             "Uninstall",
         ):
             self.assertIn(term, readme)
+
+    def test_readme_is_not_tied_to_the_codex_installer(self) -> None:
+        readme = read(ROOT / "README.md")
+        self.assertNotIn("~/.codex/skills/.system/skill-installer", readme)
+        self.assertNotIn("Guided Codex skills", readme)
+        self.assertNotIn("next Codex turn", readme)
 
 
 if __name__ == "__main__":

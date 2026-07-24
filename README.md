@@ -1,8 +1,12 @@
 # ITR-2 Filing Skills
 
-Guided Codex skills for compliant Indian ITR-2 filing. They help collect and
-reconcile evidence, identify lawful tax-saving opportunities, guide portal
+Reusable Agent Skills for compliant Indian ITR-2 filing. They help collect
+and reconcile evidence, identify lawful tax-saving opportunities, guide portal
 entry one screen at a time, and review the preview and acknowledgement.
+
+The skills follow the open
+[Agent Skills specification](https://agentskills.io/specification) and work
+with OpenAI Codex, Claude Code, and Cursor.
 
 | Skill | Purpose |
 |---|---|
@@ -13,64 +17,76 @@ The NRI skill extends the base skill; install both for an NRI filing.
 
 ## Install
 
-Install both skills from this public repository:
+You need Node.js with `npx`. Install both skills globally for Codex, Claude
+Code, and Cursor:
 
 ```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo fasilmarshooq/itr2-filing-skills \
-  --path filing-itr2 filing-itr2-nri
+npx skills add fasilmarshooq/itr2-filing-skills \
+  --skill filing-itr2 \
+  --skill filing-itr2-nri \
+  -g \
+  -a codex \
+  -a claude-code \
+  -a cursor \
+  --copy
 ```
 
-They are installed under:
-
-```text
-~/.codex/skills/filing-itr2
-~/.codex/skills/filing-itr2-nri
-```
-
-The skills are available from your next Codex turn.
+The installer places each skill in the correct user-level directory for the
+selected agents. Start a new agent session after installation if the skills do
+not appear immediately.
 
 ### Install only the base skill
 
 For an ITR-2 filing without the NRI extension:
 
 ```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo fasilmarshooq/itr2-filing-skills \
-  --path filing-itr2
+npx skills add fasilmarshooq/itr2-filing-skills \
+  --skill filing-itr2 \
+  -g \
+  -a codex \
+  -a claude-code \
+  -a cursor \
+  --copy
 ```
 
 ## Use
 
-Start a new Codex task with:
+In a new agent session, ask:
 
 ```text
-Use $filing-itr2 to guide me through my Indian ITR-2 filing one step at a time.
+Use the filing-itr2 skill to guide me through my Indian ITR-2 filing one step at a time.
 ```
 
 For an NRI filing:
 
 ```text
-Use $filing-itr2-nri with $filing-itr2 to guide my NRI ITR-2 filing one step at a time.
+Use filing-itr2-nri together with filing-itr2 to guide my NRI ITR-2 filing one step at a time.
 ```
 
 The skills ask one focused question or request one screenshot/document at a
 time. Do not provide passwords, OTPs, or portal credentials.
 
+## Compatibility
+
+The portable workflow is defined in each skill's `SKILL.md` and referenced
+files. The optional `agents/openai.yaml` files provide display metadata for
+OpenAI clients; they do not control the workflow and are ignored by agents
+that do not use them.
+
 ## Update
 
-The installer does not overwrite an existing skill directory. Move or remove
-the existing `~/.codex/skills/filing-itr2` and
-`~/.codex/skills/filing-itr2-nri` directories, then run the installation
-command again.
+Update both installed skills through the same cross-agent CLI:
+
+```bash
+npx skills update filing-itr2 filing-itr2-nri -g
+```
 
 ## Uninstall
 
-Remove these directories from your Codex skills folder:
+Remove both skills from their installed agent directories:
 
-```text
-~/.codex/skills/filing-itr2
-~/.codex/skills/filing-itr2-nri
+```bash
+npx skills remove filing-itr2 filing-itr2-nri -g
 ```
 
 ## Verify the repository
