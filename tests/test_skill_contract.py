@@ -85,5 +85,20 @@ class NriSkillContract(unittest.TestCase):
         self.assertIn("evidence", self.residency)
 
 
+class ReadmeContract(unittest.TestCase):
+    def test_readme_has_copy_paste_install_and_usage(self) -> None:
+        readme = read(ROOT / "README.md")
+        for term in (
+            "--repo fasilmarshooq/itr2-filing-skills",
+            "--path filing-itr2 filing-itr2-nri",
+            "$filing-itr2",
+            "$filing-itr2-nri",
+            "next Codex turn",
+            "Update",
+            "Uninstall",
+        ):
+            self.assertIn(term, readme)
+
+
 if __name__ == "__main__":
     unittest.main()
